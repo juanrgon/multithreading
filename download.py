@@ -10,8 +10,6 @@ import requests
 
 logger = logging.getLogger(__name__)
 
-types = {'image/jpeg', 'image/png'}
-
 
 def get_links(client_id):
     """Get all of the links and return them in a list."""
@@ -19,6 +17,7 @@ def get_links(client_id):
     resp = requests.get(
         'https://api.imgur.com/3/gallery/random/random/', headers=headers)
     data = resp.json()
+    types = {'image/jpeg', 'image/png'}
     return [item['link']
             for item in data['data']
             if ('type' in item) and (item['type'] in types)]
